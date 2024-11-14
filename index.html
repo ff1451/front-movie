@@ -1,12 +1,49 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="src/styles/index.css">
     <title>Document</title>
   </head>
   <body>
-    여기에 기본 html 작성
+    <header>
+      <h1 id="logo"><img src="./src/assets/logo.png"/></h1>
+      <div class="search-container">
+        <input class="search-bar" type="search" placeholder="Search" />
+        <button class="search-button" type="submit">
+          <img src="./src/assets/search_button.png" />
+        </button>
+      </div>
+    </header>
+
+    <div id="movie-container">
+      <h2>지금 인기있는 영화</h2>
+      <ul>
+        <li>
+          <div class="movie">
+            <div class="movie-image"></div>
+            <p class="movie-title"></p>
+            <p class="movie-rate"></p>
+          </div>
+        </li>
+        <li>
+          <div class="movie">
+            <div class="movie-image"></div>
+            <p class="movie-title"></p>
+            <p class="movie-rate"></p>
+          </div>
+        </li>
+        <li>
+          <div class="movie">
+            <div class="movie-image"></div>
+            <p class="movie-title"></p>
+            <p class="movie-rate"></p>
+          </div>
+        </li>
+      </ul>
+      <button id="more">더보기</button>
+    </div>
   </body>
 </html>
