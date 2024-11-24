@@ -19,7 +19,7 @@ header {
 }
 
 #logo {
-  background: url('../assets/logo.png') no-repeat center center;
+  background: url('../../assets/logo.png') no-repeat center center;
   width: 123px;
   height: 20px;
   cursor: pointer;
@@ -50,7 +50,7 @@ header {
   border: none;
   padding: 0;
   cursor: pointer;
-  background: url('../assets/search_button.png') no-repeat center center;
+  background: url('../../assets/search_button.png') no-repeat center center;
   background-size: contain;
 }
 
