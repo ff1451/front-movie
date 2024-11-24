@@ -1,2 +1,3 @@
 import './styles/index.css';
-import './index';
+import { App } from './App';
+

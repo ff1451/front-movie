@@ -1,23 +1,25 @@
+import { MovieList } from '../MoviesSection/MovieList';
 import { resetState } from '../../state/state';
-import { search } from './Search';
-import { loadPopularMovies } from '../../elements/loadMovies';
+import { Search } from './Search';
 import './header.css';
 
-export const header = {
+export const Header = {
   template() {
     return `
     <header>
       <h1 id="logo"></h1>
-      ${search.template()}
+      ${Search.template()}
     </header>
     `;
   },
 
   setEvent() {
     const logo = document.getElementById('logo')!;
+    Search.setEvent();
+
     logo.addEventListener('click', () => {
       resetState();
-      loadPopularMovies();
+      MovieList.loadPopularMovies();
     });
   }
 }
