@@ -17,7 +17,9 @@ function PageTitle({ prevQueryRef, appState }: PageTitleProps) {
     return "지금 인기있는 영화";
   };
 
-  return <h2>{getTitle()}</h2>;
+  return (
+    <h2 className="mb-12 text-left text-[34px] font-semibold">{getTitle()}</h2>
+  );
 }
 
 export default PageTitle;

@@ -26,7 +26,7 @@ function MoviesSection({ appState, appDispatch }: MoviesSectionProps) {
   const movieLengthRef = useRef<number>(0);
 
   return (
-    <div id="movie-container">
+    <div className="h-full w-full max-w-[920px] px-5 py-10 text-center">
       <PageTitle prevQueryRef={prevQueryRef.current} appState={appState} />
       <MovieList
         prevQueryRef={prevQueryRef}
