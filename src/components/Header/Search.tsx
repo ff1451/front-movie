@@ -7,9 +7,16 @@ interface SearchProps {
     setIsSearching: (isSearching: boolean) => void;
     setPage: (page: number) => void;
   };
+  searchClicked: boolean;
+  setSearchClicked: (searchClicked: boolean) => void;
 }
 
-function Search({ appState, appDispatch }: SearchProps) {
+function Search({
+  appState,
+  appDispatch,
+  searchClicked,
+  setSearchClicked,
+}: SearchProps) {
   const [currentQuery, setCurrentQuery] = useState<string>("");
 
   const searching = (e: React.FormEvent) => {
@@ -26,12 +33,14 @@ function Search({ appState, appDispatch }: SearchProps) {
   };
 
   return (
-    <div className="relative w-80">
+    <div className={`relative ${searchClicked ? "w-full" : "w-12"} sm:w-80`}>
       <input
-        className="h-[44px] w-full rounded-lg border border-[#d0d5dd] px-[14px] py-[10px] text-[16px] text-black"
+        className="h-[44px] w-full rounded-lg border border-[#d0d5dd] px-[14px] py-[10px] text-[16px] text-black placeholder-gray-500 placeholder-opacity-0 sm:placeholder-opacity-100"
         type="text"
         placeholder="검색"
         value={currentQuery}
+        onFocus={() => setSearchClicked(true)}
+        onBlur={() => setSearchClicked(false)}
         onChange={(e) => setCurrentQuery(e.target.value.trim())}
         onKeyDown={(e) => e.key === "Enter" && searching(e)}
       />

@@ -91,16 +91,16 @@ function MovieList({
           ))}
         </ul>
       ) : (
-        <ul className="grid grid-cols-4 gap-16 p-0">
+        <ul className="grid grid-cols-2 gap-9 p-0 sm:grid-cols-3 sm:gap-16 lg:grid-cols-4">
           {movies.map((movie, index) => (
             <li
               key={`${movie.id}-${index}`}
               className="cursor-pointer text-center"
               onClick={() => movieClick(movie.id)}
             >
-              <div className="mb-[19px] h-[273px] w-full rounded-[15px] bg-cover bg-center">
+              <div className="h-[220px] w-[140px] rounded-[15px] bg-cover bg-center sm:mb-[19px] sm:h-[273px] sm:w-[182px]">
                 <img
-                  className="h-full w-full rounded-2xl object-cover"
+                  className="h-[220px] w-[140px] rounded-2xl object-cover sm:h-full sm:w-full"
                   src={`${IMAGE_URL}${movie.poster_path}`}
                   alt={movie.title}
                 />
