@@ -4,18 +4,21 @@ interface SearchProps {
   appState: { query: string; isSearching: boolean };
   appDispatch: {
     setQuery: (query: string) => void;
-    setIsSearching: (isSearching: boolean) => void;
+    setSearchingTrue: () => void;
+    setSearchingFalse: () => void;
     setPage: (page: number) => void;
   };
   searchClicked: boolean;
-  setSearchClicked: (searchClicked: boolean) => void;
+  setSearchClickedTrue: () => void;
+  setSearchClickedFalse: () => void;
 }
 
 function Search({
   appState,
   appDispatch,
   searchClicked,
-  setSearchClicked,
+  setSearchClickedTrue,
+  setSearchClickedFalse,
 }: SearchProps) {
   const [currentQuery, setCurrentQuery] = useState<string>("");
 
@@ -23,12 +26,12 @@ function Search({
     e.preventDefault();
     if (currentQuery !== "") {
       appDispatch.setQuery(currentQuery);
-      appDispatch.setIsSearching(true);
+      appDispatch.setSearchingTrue();
       appDispatch.setPage(1);
       setCurrentQuery("");
       console.log(appState.query);
     } else {
-      appDispatch.setIsSearching(false);
+      appDispatch.setSearchingFalse();
     }
   };
 
@@ -39,8 +42,8 @@ function Search({
         type="text"
         placeholder="검색"
         value={currentQuery}
-        onFocus={() => setSearchClicked(true)}
-        onBlur={() => setSearchClicked(false)}
+        onFocus={() => setSearchClickedTrue()}
+        onBlur={() => setSearchClickedFalse()}
         onChange={(e) => setCurrentQuery(e.target.value.trim())}
         onKeyDown={(e) => e.key === "Enter" && searching(e)}
       />

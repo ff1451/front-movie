@@ -1,17 +1,10 @@
 interface ButtonProps {
   appState: {
     page: number;
-    query: string;
-    isSearching: boolean;
     isLoading: boolean;
-    hasResults: boolean;
   };
   appDispatch: {
     setPage: (page: number) => void;
-    setQuery: (query: string) => void;
-    setIsSearching: (isSearching: boolean) => void;
-    setIsLoading: (isLoading: boolean) => void;
-    setHasResults: (hasResults: boolean) => void;
   };
   movieLengthRef: number;
 }

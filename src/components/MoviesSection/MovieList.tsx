@@ -5,6 +5,7 @@ import { Movie, MovieDetail } from "../../types/movie";
 import { searchMoviesByName } from "../../apis/searchMoviesByName";
 import { getMovieDetail } from "../../apis/getMovieDetail";
 import MovieDetails from "./MovieDetails";
+import useBoolean from "../../hook/useBoolean";
 
 interface MovieListProps {
   appState: {
@@ -17,9 +18,11 @@ interface MovieListProps {
   appDispatch: {
     setPage: (page: number) => void;
     setQuery: (query: string) => void;
-    setIsSearching: (isSearching: boolean) => void;
-    setIsLoading: (isLoading: boolean) => void;
-    setHasResults: (hasResults: boolean) => void;
+    setSearchingTrue: () => void;
+    setSearchingFalse: () => void;
+    setLoadingTrue: () => void;
+    setLoadingFalse: () => void;
+    setHasResults: (data: any[]) => void;
   };
   prevQueryRef: React.MutableRefObject<string>;
   movieLengthRef: React.MutableRefObject<number>;
@@ -32,7 +35,8 @@ function MovieList({
   movieLengthRef,
 }: MovieListProps) {
   const [movies, setMovies] = useState<Movie[]>([]);
-  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+  const [isModalOpen, setIsModalOpenTrue, setIsModalOpenFalse] =
+    useBoolean(false);
   const [selectedMovie, setSelectedMovie] = useState<MovieDetail | null>(null);
 
   useEffect(() => {
@@ -49,32 +53,32 @@ function MovieList({
   }, [appState.isSearching, appState.query]);
 
   const loadMovies = async () => {
-    appDispatch.setIsLoading(true);
+    appDispatch.setLoadingTrue();
     if (!appState.isSearching) {
       const Movies = await getPopularMovies(appState.page);
       setMovies((prevMovies) => [...prevMovies, ...Movies]);
       console.log("Movies:", Movies);
-      appDispatch.setHasResults(Movies.length > 0);
+      appDispatch.setHasResults(Movies);
       movieLengthRef.current = Movies.length;
     } else {
       const Movies = await searchMoviesByName(appState.query, appState.page);
       setMovies((prevMovies) => [...prevMovies, ...Movies]);
       prevQueryRef.current = appState.query;
       movieLengthRef.current = Movies.length;
-      appDispatch.setHasResults(Movies.length > 0);
+      appDispatch.setHasResults(Movies);
     }
-    appDispatch.setIsLoading(false);
+    appDispatch.setLoadingFalse();
   };
 
   const movieClick = async (movieId: number) => {
     const movieDetail = await getMovieDetail(movieId);
-    setIsModalOpen(true);
+    setIsModalOpenTrue();
     setSelectedMovie(movieDetail);
     console.log("click");
   };
 
   const closeModal = () => {
-    setIsModalOpen(false);
+    setIsModalOpenFalse();
     setSelectedMovie(null);
   };
 

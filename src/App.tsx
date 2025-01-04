@@ -1,6 +1,6 @@
 import Header from "./components/Header/Header";
 import MoviesSection from "./components/MoviesSection/index";
-import useAppState from "./state/state";
+import useAppState from "./hook/useAppState";
 
 function App() {
   const { state, dispatch } = useAppState();

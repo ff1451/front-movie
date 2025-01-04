@@ -2,7 +2,6 @@ import { useRef } from "react";
 import Button from "./Button";
 import MovieList from "./MovieList";
 import PageTitle from "./PageTitle";
-import "./MovieSection.css";
 
 interface MoviesSectionProps {
   appState: {
@@ -15,9 +14,11 @@ interface MoviesSectionProps {
   appDispatch: {
     setPage: (page: number) => void;
     setQuery: (query: string) => void;
-    setIsSearching: (isSearching: boolean) => void;
-    setIsLoading: (isLoading: boolean) => void;
-    setHasResults: (hasResults: boolean) => void;
+    setSearchingTrue: () => void;
+    setSearchingFalse: () => void;
+    setLoadingTrue: () => void;
+    setLoadingFalse: () => void;
+    setHasResults: (data: any[]) => void;
   };
 }
 
