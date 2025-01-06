@@ -1,13 +1,13 @@
+import { useAppState } from "../../hook/useAppState";
+
 interface PageTitleProps {
   prevQueryRef: string;
-  appState: {
-    isSearching: boolean;
-    hasResults: boolean;
-  };
 }
 
-function PageTitle({ prevQueryRef, appState }: PageTitleProps) {
+function PageTitle({ prevQueryRef }: PageTitleProps) {
+  const appState = useAppState();
   const getTitle = () => {
+    console.log(prevQueryRef);
     if (prevQueryRef && !appState.hasResults) {
       return `"${prevQueryRef}"의 결과가 없습니다.`;
     }

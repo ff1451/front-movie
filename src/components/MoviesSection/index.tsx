@@ -3,43 +3,15 @@ import Button from "./Button";
 import MovieList from "./MovieList";
 import PageTitle from "./PageTitle";
 
-interface MoviesSectionProps {
-  appState: {
-    page: number;
-    query: string;
-    isSearching: boolean;
-    isLoading: boolean;
-    hasResults: boolean;
-  };
-  appDispatch: {
-    setPage: (page: number) => void;
-    setQuery: (query: string) => void;
-    setSearchingTrue: () => void;
-    setSearchingFalse: () => void;
-    setLoadingTrue: () => void;
-    setLoadingFalse: () => void;
-    setHasResults: (data: any[]) => void;
-  };
-}
-
-function MoviesSection({ appState, appDispatch }: MoviesSectionProps) {
+function MoviesSection() {
   const prevQueryRef = useRef<string>("");
   const movieLengthRef = useRef<number>(0);
 
   return (
     <div className="h-full w-full max-w-[920px] px-5 py-10 text-center">
-      <PageTitle prevQueryRef={prevQueryRef.current} appState={appState} />
-      <MovieList
-        prevQueryRef={prevQueryRef}
-        movieLengthRef={movieLengthRef}
-        appState={appState}
-        appDispatch={appDispatch}
-      />
-      <Button
-        movieLengthRef={movieLengthRef.current}
-        appState={appState}
-        appDispatch={appDispatch}
-      />
+      <PageTitle prevQueryRef={prevQueryRef.current} />
+      <MovieList prevQueryRef={prevQueryRef} movieLengthRef={movieLengthRef} />
+      <Button movieLengthRef={movieLengthRef.current} />
     </div>
   );
 }

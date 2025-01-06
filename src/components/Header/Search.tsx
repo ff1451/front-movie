@@ -1,37 +1,31 @@
 import { useState } from "react";
+import { useAppDispatch, useAppState } from "../../hook/useAppState";
 
 interface SearchProps {
-  appState: { query: string; isSearching: boolean };
-  appDispatch: {
-    setQuery: (query: string) => void;
-    setSearchingTrue: () => void;
-    setSearchingFalse: () => void;
-    setPage: (page: number) => void;
-  };
   searchClicked: boolean;
   setSearchClickedTrue: () => void;
   setSearchClickedFalse: () => void;
 }
 
 function Search({
-  appState,
-  appDispatch,
   searchClicked,
   setSearchClickedTrue,
   setSearchClickedFalse,
 }: SearchProps) {
   const [currentQuery, setCurrentQuery] = useState<string>("");
+  const appState = useAppState();
+  const dispatch = useAppDispatch();
 
   const searching = (e: React.FormEvent) => {
     e.preventDefault();
     if (currentQuery !== "") {
-      appDispatch.setQuery(currentQuery);
-      appDispatch.setSearchingTrue();
-      appDispatch.setPage(1);
+      dispatch.setQuery(currentQuery);
+      dispatch.setSearchingTrue();
+      dispatch.setPage(1);
       setCurrentQuery("");
       console.log(appState.query);
     } else {
-      appDispatch.setSearchingFalse();
+      dispatch.setSearchingFalse();
     }
   };
 

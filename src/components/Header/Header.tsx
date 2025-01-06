@@ -1,26 +1,17 @@
 import Search from "./Search";
 import logo from "../../assets/logo.png";
 import useBoolean from "../../hook/useBoolean";
+import { useAppDispatch } from "../../hook/useAppState";
 
-interface HeaderProps {
-  appState: { query: string; isSearching: boolean; isLoading: boolean };
-  appDispatch: {
-    setPage: (page: number) => void;
-    setQuery: (query: string) => void;
-    setSearchingTrue: () => void;
-    setSearchingFalse: () => void;
-    setLoadingTrue: () => void;
-    setLoadingFalse: () => void;
-    resetState: () => void;
-  };
-}
-
-function Header({ appState, appDispatch }: HeaderProps) {
+function Header() {
+  const dispatch = useAppDispatch();
   const [searchClicked, setSearchClickedTrue, setSearchClickedFalse] =
     useBoolean(false);
 
   const LogoClick = () => {
-    appDispatch.resetState();
+    dispatch.setQuery("");
+    dispatch.setSearchingFalse();
+    dispatch.setPage(1);
     console.log("Logo Clicked");
   };
 
@@ -38,8 +29,6 @@ function Header({ appState, appDispatch }: HeaderProps) {
         onClick={LogoClick}
       />
       <Search
-        appState={appState}
-        appDispatch={appDispatch}
         searchClicked={searchClicked}
         setSearchClickedTrue={setSearchClickedTrue}
         setSearchClickedFalse={setSearchClickedFalse}

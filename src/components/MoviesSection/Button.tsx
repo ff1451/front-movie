@@ -1,18 +1,16 @@
+import { useAppDispatch, useAppState } from "../../hook/useAppState";
+
 interface ButtonProps {
-  appState: {
-    page: number;
-    isLoading: boolean;
-  };
-  appDispatch: {
-    setPage: (page: number) => void;
-  };
   movieLengthRef: number;
 }
 
-function Button({ appState, appDispatch, movieLengthRef }: ButtonProps) {
+function Button({ movieLengthRef }: ButtonProps) {
+  const appState = useAppState();
+  const dispatch = useAppDispatch();
+
   const loadMore = () => {
     if (!appState.isLoading) {
-      appDispatch.setPage(appState.page + 1);
+      dispatch.setPage(appState.page + 1);
     }
   };
   return movieLengthRef >= 20 ? (
