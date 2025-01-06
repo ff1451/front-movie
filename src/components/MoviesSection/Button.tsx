@@ -1,10 +1,6 @@
 import { useAppDispatch, useAppState } from "../../hook/useAppState";
 
-interface ButtonProps {
-  movieLengthRef: number;
-}
-
-function Button({ movieLengthRef }: ButtonProps) {
+function Button() {
   const appState = useAppState();
   const dispatch = useAppDispatch();
 
@@ -13,7 +9,7 @@ function Button({ movieLengthRef }: ButtonProps) {
       dispatch.setPage(appState.page + 1);
     }
   };
-  return movieLengthRef >= 20 ? (
+  return appState.movieLength >= 20 ? (
     <>
       <button
         id="more"

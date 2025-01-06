@@ -1,18 +1,13 @@
 import { useAppState } from "../../hook/useAppState";
 
-interface PageTitleProps {
-  prevQueryRef: string;
-}
-
-function PageTitle({ prevQueryRef }: PageTitleProps) {
+function PageTitle() {
   const appState = useAppState();
   const getTitle = () => {
-    console.log(prevQueryRef);
-    if (prevQueryRef && !appState.hasResults) {
-      return `"${prevQueryRef}"의 결과가 없습니다.`;
+    if (appState.query && !appState.hasResults) {
+      return `"${appState.query}"의 결과가 없습니다.`;
     }
-    if (prevQueryRef && appState.hasResults) {
-      return `${prevQueryRef}의 검색 결과`;
+    if (appState.query && appState.hasResults) {
+      return `${appState.query}의 검색 결과`;
     }
     return "지금 인기있는 영화";
   };

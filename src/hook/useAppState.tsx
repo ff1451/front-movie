@@ -6,6 +6,7 @@ interface AppState {
   isSearching: boolean;
   isLoading: boolean;
   hasResults: boolean;
+  movieLength: number;
 }
 
 const initialState: AppState = {
@@ -14,6 +15,7 @@ const initialState: AppState = {
   isSearching: false,
   isLoading: false,
   hasResults: true,
+  movieLength: 0,
 };
 
 const initialAction = {
@@ -24,6 +26,7 @@ const initialAction = {
   setLoadingTrue: () => {},
   setLoadingFalse: () => {},
   setHasResults: (data: any[]) => {},
+  setMovieLength: (movieLength: number) => {},
 };
 
 const AppStateContext = createContext<AppState>(initialState);
@@ -43,6 +46,8 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
     setLoadingFalse: () => setState((prev) => ({ ...prev, isLoading: false })),
     setHasResults: (data: any[]) =>
       setState((prev) => ({ ...prev, hasResults: data.length > 0 })),
+    setMovieLength: (movieLength: number) =>
+      setState((prev) => ({ ...prev, movieLength })),
   };
 
   return (

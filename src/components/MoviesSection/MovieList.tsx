@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { IMAGE_URL } from "../../constants";
 import { getPopularMovies } from "../../apis/getPopularMovies";
 import { Movie, MovieDetail } from "../../types/movie";
@@ -8,12 +8,7 @@ import MovieDetails from "./MovieDetails";
 import useBoolean from "../../hook/useBoolean";
 import { useAppDispatch, useAppState } from "../../hook/useAppState";
 
-interface MovieListProps {
-  prevQueryRef: React.MutableRefObject<string>;
-  movieLengthRef: React.MutableRefObject<number>;
-}
-
-function MovieList({ prevQueryRef, movieLengthRef }: MovieListProps) {
+function MovieList() {
   const [movies, setMovies] = useState<Movie[]>([]);
   const [isModalOpen, setIsModalOpenTrue, setIsModalOpenFalse] =
     useBoolean(false);
@@ -43,9 +38,7 @@ function MovieList({ prevQueryRef, movieLengthRef }: MovieListProps) {
 
     setMovies((prevMovies) => [...prevMovies, ...Movies]);
     dispatch.setHasResults(Movies);
-    movieLengthRef.current = Movies.length;
-    prevQueryRef.current = appState.query;
-    console.log(movieLengthRef, prevQueryRef);
+    dispatch.setMovieLength(Movies.length);
     dispatch.setLoadingFalse();
     console.log(appState);
   };
