@@ -1,17 +1,17 @@
 import Search from "./Search";
 import logo from "../../assets/logo.png";
 import useBoolean from "../../hook/useBoolean";
-import { useAppDispatch } from "../../hook/useAppState";
+import useAppStore from "../../zustand/store";
 
 function Header() {
-  const dispatch = useAppDispatch();
+  const { setPage, setQuery, setIsSearching } = useAppStore();
   const [searchClicked, setSearchClickedTrue, setSearchClickedFalse] =
     useBoolean(false);
 
   const LogoClick = () => {
-    dispatch.setQuery("");
-    dispatch.setSearchingFalse();
-    dispatch.setPage(1);
+    setQuery("");
+    setIsSearching(false);
+    setPage(1);
     console.log("Logo Clicked");
   };
 

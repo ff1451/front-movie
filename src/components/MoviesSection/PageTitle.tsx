@@ -1,13 +1,13 @@
-import { useAppState } from "../../hook/useAppState";
+import useAppStore from "../../zustand/store";
 
 function PageTitle() {
-  const appState = useAppState();
+  const { query, hasResults } = useAppStore();
   const getTitle = () => {
-    if (appState.query && !appState.hasResults) {
-      return `"${appState.query}"의 결과가 없습니다.`;
+    if (query && !hasResults) {
+      return `"${query}"의 결과가 없습니다.`;
     }
-    if (appState.query && appState.hasResults) {
-      return `${appState.query}의 검색 결과`;
+    if (query && hasResults) {
+      return `${query}의 검색 결과`;
     }
     return "지금 인기있는 영화";
   };

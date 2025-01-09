@@ -1,15 +1,14 @@
-import { useAppDispatch, useAppState } from "../../hook/useAppState";
+import useAppStore from "../../zustand/store";
 
 function Button() {
-  const appState = useAppState();
-  const dispatch = useAppDispatch();
+  const { page, isLoading, movieLength, setPage } = useAppStore();
 
   const loadMore = () => {
-    if (!appState.isLoading) {
-      dispatch.setPage(appState.page + 1);
+    if (!isLoading) {
+      setPage(page + 1);
     }
   };
-  return appState.movieLength >= 20 ? (
+  return movieLength >= 20 ? (
     <>
       <button
         id="more"

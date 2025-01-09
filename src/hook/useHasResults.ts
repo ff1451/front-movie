@@ -1,8 +1,6 @@
 import useBoolean from "./useBoolean";
 
-function useHasResults(
-  initialValue: boolean,
-): [boolean, (data: any[]) => void] {
+function useHasResults(initialValue: boolean) {
   const [hasResults, setTrue, setFalse] = useBoolean(initialValue);
 
   const setHasResults = (data: any[]) => {

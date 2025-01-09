@@ -6,41 +6,47 @@ import { searchMoviesByName } from "../../apis/searchMoviesByName";
 import { getMovieDetail } from "../../apis/getMovieDetail";
 import MovieDetails from "./MovieDetails";
 import useBoolean from "../../hook/useBoolean";
-import { useAppDispatch, useAppState } from "../../hook/useAppState";
+import useAppStore from "../../zustand/store";
 
 function MovieList() {
   const [movies, setMovies] = useState<Movie[]>([]);
   const [isModalOpen, setIsModalOpenTrue, setIsModalOpenFalse] =
     useBoolean(false);
   const [selectedMovie, setSelectedMovie] = useState<MovieDetail | null>(null);
-  const appState = useAppState();
-  const dispatch = useAppDispatch();
+  const {
+    page,
+    query,
+    isSearching,
+    isLoading,
+    setIsLoading,
+    setHasResults,
+    setMovieLength,
+  } = useAppStore();
 
   useEffect(() => {
-    if (appState.page >= 1) {
+    if (page >= 1) {
       loadMovies();
     }
-  }, [appState.page]);
+  }, [page]);
 
   useEffect(() => {
-    if (appState.isSearching) {
+    if (isSearching) {
       setMovies([]);
       loadMovies();
     }
-  }, [appState.isSearching, appState.query]);
+  }, [isSearching, query]);
 
   const loadMovies = async () => {
-    dispatch.setLoadingTrue();
+    setIsLoading(true);
 
-    const Movies = appState.isSearching
-      ? await searchMoviesByName(appState.query, appState.page)
-      : await getPopularMovies(appState.page);
+    const Movies = isSearching
+      ? await searchMoviesByName(query, page)
+      : await getPopularMovies(page);
 
     setMovies((prevMovies) => [...prevMovies, ...Movies]);
-    dispatch.setHasResults(Movies);
-    dispatch.setMovieLength(Movies.length);
-    dispatch.setLoadingFalse();
-    console.log(appState);
+    setHasResults(Movies);
+    setMovieLength(Movies.length);
+    setIsLoading(false);
   };
 
   const movieClick = async (movieId: number) => {
@@ -56,7 +62,7 @@ function MovieList() {
 
   return (
     <>
-      {appState.isLoading ? (
+      {isLoading ? (
         <ul id="movie-list" className="grid grid-cols-4 gap-16 p-0">
           {Array.from({ length: 8 }, (_, index) => (
             <li key={index} className="mb-4 rounded-lg bg-[#2d2d2d]">

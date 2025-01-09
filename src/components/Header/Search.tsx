@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useAppDispatch, useAppState } from "../../hook/useAppState";
+import useAppStore from "../../zustand/store";
 
 interface SearchProps {
   searchClicked: boolean;
@@ -12,20 +12,19 @@ function Search({
   setSearchClickedTrue,
   setSearchClickedFalse,
 }: SearchProps) {
-  const [currentQuery, setCurrentQuery] = useState<string>("");
-  const appState = useAppState();
-  const dispatch = useAppDispatch();
+  const [currentQuery, setCurrentQuery] = useState("");
+  const { query, setQuery, setIsSearching, setPage } = useAppStore();
 
   const searching = (e: React.FormEvent) => {
     e.preventDefault();
     if (currentQuery !== "") {
-      dispatch.setQuery(currentQuery);
-      dispatch.setSearchingTrue();
-      dispatch.setPage(1);
+      setQuery(currentQuery);
+      setIsSearching(true);
+      setPage(1);
       setCurrentQuery("");
-      console.log(appState.query);
+      console.log(query);
     } else {
-      dispatch.setSearchingFalse();
+      setIsSearching(false);
     }
   };
 
