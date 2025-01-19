@@ -1,19 +1,10 @@
 import Search from "./Search";
 import logo from "../../assets/logo.png";
 import useBoolean from "../../hook/useBoolean";
-import useAppStore from "../../zustand/store";
 
 function Header() {
-  const { setPage, setQuery, setIsSearching } = useAppStore();
   const [searchClicked, setSearchClickedTrue, setSearchClickedFalse] =
     useBoolean(false);
-
-  const LogoClick = () => {
-    setQuery("");
-    setIsSearching(false);
-    setPage(1);
-    console.log("Logo Clicked");
-  };
 
   return (
     <header
@@ -26,7 +17,6 @@ function Header() {
         className={`h-5 w-[123px] cursor-pointer ${
           searchClicked ? "hidden sm:block" : ""
         }`}
-        onClick={LogoClick}
       />
       <Search
         searchClicked={searchClicked}

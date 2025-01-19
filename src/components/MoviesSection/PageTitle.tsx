@@ -1,7 +1,13 @@
 import useAppStore from "../../zustand/store";
+import { useSearchMovies } from "./hooks/useSearchMovies";
 
 function PageTitle() {
-  const { query, hasResults } = useAppStore();
+  const { query } = useAppStore();
+  const { data } = useSearchMovies();
+
+  const movies = data?.pages.flatMap((page) => page) ?? [];
+  const hasResults = movies.length > 0;
+
   const getTitle = () => {
     if (query && !hasResults) {
       return `"${query}"의 결과가 없습니다.`;

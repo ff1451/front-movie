@@ -1,68 +1,39 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { IMAGE_URL } from "../../constants";
-import { getPopularMovies } from "../../apis/getPopularMovies";
-import { Movie, MovieDetail } from "../../types/movie";
-import { searchMoviesByName } from "../../apis/searchMoviesByName";
-import { getMovieDetail } from "../../apis/getMovieDetail";
 import MovieDetails from "./MovieDetails";
 import useBoolean from "../../hook/useBoolean";
+import { usePopularMovies } from "./hooks/usePopularMovies";
 import useAppStore from "../../zustand/store";
+import { useSearchMovies } from "./hooks/useSearchMovies";
 
 function MovieList() {
-  const [movies, setMovies] = useState<Movie[]>([]);
+  const { isSearching } = useAppStore();
+
+  const { data: popularMoviesData, isLoading: popularMovieLoading } =
+    usePopularMovies();
+  const { data: searchMoviesData, isLoading: searchMovieLoading } =
+    useSearchMovies();
+
   const [isModalOpen, setIsModalOpenTrue, setIsModalOpenFalse] =
     useBoolean(false);
-  const [selectedMovie, setSelectedMovie] = useState<MovieDetail | null>(null);
-  const {
-    page,
-    query,
-    isSearching,
-    isLoading,
-    setIsLoading,
-    setHasResults,
-    setMovieLength,
-  } = useAppStore();
+  const [selectedMovieId, setSelectedMovieId] = useState<number | null>(null);
 
-  useEffect(() => {
-    if (page >= 1) {
-      loadMovies();
-    }
-  }, [page]);
-
-  useEffect(() => {
-    if (isSearching) {
-      setMovies([]);
-      loadMovies();
-    }
-  }, [isSearching, query]);
-
-  const loadMovies = async () => {
-    setIsLoading(true);
-
-    const Movies = isSearching
-      ? await searchMoviesByName(query, page)
-      : await getPopularMovies(page);
-
-    setMovies((prevMovies) => [...prevMovies, ...Movies]);
-    setHasResults(Movies);
-    setMovieLength(Movies.length);
-    setIsLoading(false);
-  };
+  const movies = !isSearching
+    ? (popularMoviesData?.pages?.flatMap((page) => page) ?? [])
+    : (searchMoviesData?.pages?.flatMap((page) => page) ?? []);
 
   const movieClick = async (movieId: number) => {
-    const movieDetail = await getMovieDetail(movieId);
     setIsModalOpenTrue();
-    setSelectedMovie(movieDetail);
+    setSelectedMovieId(movieId);
   };
 
   const closeModal = () => {
     setIsModalOpenFalse();
-    setSelectedMovie(null);
   };
 
   return (
     <>
-      {isLoading ? (
+      {popularMovieLoading || searchMovieLoading ? (
         <ul id="movie-list" className="grid grid-cols-4 gap-16 p-0">
           {Array.from({ length: 8 }, (_, index) => (
             <li key={index} className="mb-4 rounded-lg bg-[#2d2d2d]">
@@ -98,8 +69,8 @@ function MovieList() {
           ))}
         </ul>
       )}
-      {isModalOpen && selectedMovie && (
-        <MovieDetails movieDetail={selectedMovie} onClose={closeModal} />
+      {isModalOpen && selectedMovieId && (
+        <MovieDetails movieId={selectedMovieId} onClose={closeModal} />
       )}
     </>
   );

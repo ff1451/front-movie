@@ -13,16 +13,14 @@ function Search({
   setSearchClickedFalse,
 }: SearchProps) {
   const [currentQuery, setCurrentQuery] = useState("");
-  const { query, setQuery, setIsSearching, setPage } = useAppStore();
+  const { setQuery, setIsSearching } = useAppStore();
 
   const searching = (e: React.FormEvent) => {
     e.preventDefault();
     if (currentQuery !== "") {
       setQuery(currentQuery);
       setIsSearching(true);
-      setPage(1);
       setCurrentQuery("");
-      console.log(query);
     } else {
       setIsSearching(false);
     }
