@@ -1,6 +1,6 @@
-import { IMAGE_URL } from "../../constants";
+import { IMAGE_URL } from "@constants";
 import RatingStar from "./Rating";
-import { useMovieDetail } from "./hooks/useMovieDetail";
+import { useMovieDetail } from "MoviesSection/hooks/useMovieDetail";
 
 interface MovieDetailProps {
   movieId: number;

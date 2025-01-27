@@ -1,5 +1,5 @@
 import { useState } from "react";
-import useAppStore from "../../zustand/store";
+import useAppStore from "@zustand/store";
 
 interface SearchProps {
   searchClicked: boolean;

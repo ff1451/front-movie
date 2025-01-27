@@ -1,5 +1,5 @@
-import useAppStore from "../../zustand/store";
-import { useSearchMovies } from "./hooks/useSearchMovies";
+import useAppStore from "@/zustand/store";
+import { useSearchMovies } from "MoviesSection/hooks/useSearchMovies";
 
 function PageTitle() {
   const { query } = useAppStore();

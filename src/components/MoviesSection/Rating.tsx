@@ -1,5 +1,5 @@
 import { useState } from "react";
-import star from "../../assets/star.svg";
+import star from "@/assets/star.svg";
 
 function RatingStar() {
   const [userRating, setUserRating] = useState<number>(0);

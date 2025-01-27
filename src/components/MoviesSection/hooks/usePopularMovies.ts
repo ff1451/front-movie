@@ -1,5 +1,5 @@
 import { useSuspenseInfiniteQuery } from "@tanstack/react-query";
-import { getPopularMovies } from "../../../apis/getPopularMovies";
+import { getPopularMovies } from "@apis/getPopularMovies";
 
 export const usePopularMovies = () => {
   return useSuspenseInfiniteQuery({

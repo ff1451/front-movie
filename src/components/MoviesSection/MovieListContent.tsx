@@ -1,9 +1,9 @@
 import { lazy, Suspense, useState } from "react";
-import { IMAGE_URL } from "../../constants";
-import useBoolean from "../../hook/useBoolean";
-import { usePopularMovies } from "./hooks/usePopularMovies";
-import useAppStore from "../../zustand/store";
-import { useSearchMovies } from "./hooks/useSearchMovies";
+import { IMAGE_URL } from "@/constants";
+import useBoolean from "hook/useBoolean";
+import { usePopularMovies } from "MoviesSection/hooks/usePopularMovies";
+import useAppStore from "@/zustand/store";
+import { useSearchMovies } from "MoviesSection/hooks/useSearchMovies";
 
 function MovieListContent() {
   const MovieDetails = lazy(() => import("./MovieDetails"));

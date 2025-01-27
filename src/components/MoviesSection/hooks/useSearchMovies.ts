@@ -1,6 +1,6 @@
 import { useInfiniteQuery } from "@tanstack/react-query";
-import { searchMoviesByName } from "../../../apis/searchMoviesByName";
-import useAppStore from "../../../zustand/store";
+import { searchMoviesByName } from "@apis/searchMoviesByName";
+import useAppStore from "@zustand/store";
 
 export const useSearchMovies = () => {
   const { query } = useAppStore();

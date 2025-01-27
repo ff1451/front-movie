@@ -1,6 +1,6 @@
-import Search from "./Search";
-import logo from "../../assets/logo.png";
-import useBoolean from "../../hook/useBoolean";
+import Search from "components/Header/Search";
+import logo from "@assets/logo.png";
+import useBoolean from "hook/useBoolean";
 
 function Header() {
   const [searchClicked, setSearchClickedTrue, setSearchClickedFalse] =

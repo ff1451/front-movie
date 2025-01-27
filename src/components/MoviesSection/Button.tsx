@@ -1,6 +1,6 @@
-import { usePopularMovies } from "./hooks/usePopularMovies";
-import useAppStore from "../../zustand/store";
-import { useSearchMovies } from "./hooks/useSearchMovies";
+import { usePopularMovies } from "@components/MoviesSection/hooks/usePopularMovies";
+import useAppStore from "@zustand/store";
+import { useSearchMovies } from "@components/MoviesSection/hooks/useSearchMovies";
 
 function Button() {
   const { isSearching } = useAppStore();

@@ -1,5 +1,5 @@
-import { BASE_URL } from "../constants";
-import type { Movie } from "../types/movie";
+import { BASE_URL } from "@/constants";
+import type { Movie } from "@/types/movie";
 
 const API_KEY = import.meta.env.VITE_API_KEY;
 
